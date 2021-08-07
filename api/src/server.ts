@@ -1,4 +1,6 @@
 import express from 'express'
+import cors from 'cors'
+
 import mainRouter from './router'
 
 import { APP_BASE_URL } from './constants';
@@ -9,6 +11,12 @@ export const createServer = async () => {
 
     //Notre serveur parsera les requête entrante en Json
     server.use(express.json())
+
+    //On indique les cors (qui peut emettre des call depuis notre API)
+    server.use(cors({
+        origin:"http://localhost:1234"
+    }))
+    
 
     //On rajoute le router à notre server
     //Il sera accessible sur la route APP_BASE_URL, ici -> /api/v1/
