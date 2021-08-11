@@ -5,4 +5,6 @@ import path from 'path'
 const envPath = path.join(__dirname, './../../../');
 dotenv.config({ path: envPath + './.env' })
 
+console.log(process.env.API_BASE_URL);
+
 export const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:3000/api/v1/'
