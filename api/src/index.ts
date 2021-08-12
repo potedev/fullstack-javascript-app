@@ -1,7 +1,7 @@
 import { createServer } from './server';
 import { PORT } from './constants'
 
-import {prisma} from './database/index'
+import { prisma } from './database/index'
 
 const main = async () => {
     const server = await createServer();
