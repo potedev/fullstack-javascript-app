@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+
 import { InputGroup } from '../components/inputGroup'
 import { SubmitButton } from '../components/submitButton'
 import api from '../utils/api'
@@ -9,6 +11,11 @@ export const Register = () => {
     const [error, setError] = useState(null)
     const [fieldError, setFieldError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [redirect, setRedirect] = useState(false)
+
+    if (redirect) {
+        return <Redirect to="/login" />;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,6 +25,22 @@ export const Register = () => {
         setIsLoading(false)
 
         //Logic du call d'API à faire pour la partie REGISTER
+
+        const body = {
+            email,
+            password
+        }
+
+
+        try {
+            const result = await api.post('/users/', body);
+
+            if (result.status === 201) {
+                setRedirect(true)
+            }
+        } catch (err) {
+            setError(err.response.data.message)
+        }
     }
 
     return (
