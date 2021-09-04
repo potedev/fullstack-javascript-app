@@ -1,0 +1,2 @@
+#DATABASE_URL="mysql://root:@localhost:3306/cprom_bookstore?schema=public" npx prisma migrate dev
+#DATABASE_URL="mysql://root:@localhost:3306/cprom_bookstore?schema=public" npx prisma studio
