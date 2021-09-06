@@ -8,9 +8,9 @@
     "dev": "npx parcel ./src/index.html"
   },
   "devDependencies": {
-    "@parcel/transformer-less": "2.0.0-beta.2",
+    "@parcel/transformer-less": "^2.0.0-rc.0",
     "dotenv": "^10.0.0",
-    "parcel": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-rc.0",
     "react-router-dom": "^5.2.0",
     "typescript": "^4.3.5"
   },
