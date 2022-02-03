@@ -6,10 +6,15 @@ import { AuthRoute } from './components/authRoute'
 
 import { Login } from './pages/login'
 import { Register } from './pages/register'
+import { Inscription } from "./pages/inscription";
 import { Posts } from './pages/posts'
+import { Page } from './pages/page'
 import { Layout } from "./components/layout";
 
 import { getLocalStorageItem } from "./utils/localStorage";
+
+import "react-notion/src/styles.css";
+import "prismjs/themes/prism-tomorrow.css";
 
 const App = () => {
     //State title
@@ -48,15 +53,16 @@ const App = () => {
     return (
         <Router>
             <Switch>
+                <Route path="/inscription" component={Inscription} />
+                <Route path="/page" component={Page} />
                 {/* http://localhost:1234/register */}
                 <Route path="/register" component={Register} />
                 {/* http://localhost:1234/login */}
                 <Route path="/login" component={Login} />
-                <Layout>
-                    {/* http://localhost:1234/ */}
+                {/* <Layout>
                     <AuthRoute exact path="/" component={Posts} />
                     <AuthRoute path="/posts" component={Posts} />
-                </Layout>
+                </Layout> */}
             </Switch>
         </Router>
         // <>

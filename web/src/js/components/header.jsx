@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { removeLocalStorageItem } from '../utils/localStorage';
 import { Redirect } from 'react-router-dom';
 import { useAuth } from './authRoute'
+import api from '../utils/api'
 
 const Header = (props) => {
     const [redirect, setRedirect] = useState(false)
@@ -12,9 +13,19 @@ const Header = (props) => {
         return <Redirect to="/login" />
     }
 
-    const disconnect = () => {
-        removeLocalStorageItem('user');
-        setRedirect(true)
+    const disconnect = async () => {
+        // setRedirect(true)
+        console.log('disconnect');
+        try {
+            const result = await api.post('/auth/logout');
+
+            if (result.status === 200) {
+                removeLocalStorageItem('user');
+                // setRedirect(true)
+            }
+            console.log(err.response);
+        } catch (err) {
+        }
     }
 
     return (
@@ -27,7 +38,7 @@ const Header = (props) => {
                     {!isLogged ?
                         <Link to="/login">Login</Link>
                         :
-                        <button onClick={disconnect}>Disconnect</button>
+                        <button onClick={disconnect}>Didddsconnect</button>
                     }
                 </li>
                 <li >

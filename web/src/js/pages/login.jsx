@@ -5,7 +5,8 @@ import { InputGroup } from '../components/inputGroup'
 import { SubmitButton } from '../components/submitButton'
 
 import { setLocalStorageItem } from '../utils/localStorage'
-import api from '../utils/api'
+import api, { addXsrfToken } from '../utils/api'
+import axios from 'axios'
 
 export const Login = () => {
 
@@ -38,16 +39,21 @@ export const Login = () => {
         }
 
         try {
-            const result = await api.post('/users/authenticate', body);
+            const result = await api.post('/auth/login', body);
 
             if (result.status === 200) {
-                console.log(result);
-                setLocalStorageItem(result.data,'user')
+                console.log(result.data);
+                setLocalStorageItem(result.data.xsrfToken, 'xsrf')
+                addXsrfToken(result.data.xsrfToken)
                 setRedirect(true)
             }
         } catch (err) {
             setError(err.response.data.message)
         }
+    }
+
+    const handleGitHubAuth = () => {
+        const apiCall = axios.get(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_ID}&redirect_uri=http://localhost:1234/inscription`)
     }
 
     return (
@@ -60,6 +66,7 @@ export const Login = () => {
                 <InputGroup handleChange={setPassword} isValid={fieldError !== "password"} label="Password" type="password" required={true} minLength="1" maxLength="15" />
                 <SubmitButton name="Se connecter" />
             </form>
+            <a href={`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_ID}&scope=read:user,user:email&redirect_uri=http://localhost:1234/inscription?oauth`}>Se connecter avec Github</a>
         </div>
     )
 }

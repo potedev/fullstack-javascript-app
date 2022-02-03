@@ -7,7 +7,7 @@ const mainRouter: Router = Router();
 
 //Voilà, notre première route !
 mainRouter.get('/', (_: Request, res: Response) => {
-    res.json('Hello CPROM');
+    res.json({message:'Hello CPROM'});
 })
 
 mainRouter.get('/posts', async (_: Request, res: Response) => {
